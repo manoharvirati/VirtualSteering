@@ -82,17 +82,7 @@ with mp_hands.Hands(
 
         l = (int(math.sqrt((co[0][0] - co[1][0]) ** 2 * (co[0][1] - co[1][1]) ** 2)) - 150) // 2
         cv2.line(image, (int(xa), int(ya)), (int(xb), int(yb)), (195, 255, 62), 20)
-
-        if co[0][0] < co[1][0] and co[0][1] - co[1][1] > 65:
-            # When the slope is negative, we turn left.
-            print("Turn right.")
-            keyinput.release_key('s')
-            keyinput.release_key('a')
-            keyinput.press_key('d')
-            cv2.putText(image, "Turn right", (50, 50), font, 0.8, (0, 255, 0), 2, cv2.LINE_AA)
-            cv2.line(image, (int(xap), int(yap)), (int(xm), int(ym)), (195, 255, 62), 20)
-
-        elif co[1][0] > co[0][0] and co[1][1] - co[0][1] > 65:
+        if co[0][0] > co[1][0] and co[0][1]>co[1][1] and co[0][1] - co[1][1] > 65:
             print("Turn left.")
             keyinput.release_key('s')
             keyinput.release_key('d')
@@ -100,6 +90,32 @@ with mp_hands.Hands(
             cv2.putText(image, "Turn left", (50, 50), font, 0.8, (0, 255, 0), 2, cv2.LINE_AA)
             cv2.line(image, (int(xbp), int(ybp)), (int(xm), int(ym)), (195, 255, 62), 20)
 
+
+        elif co[1][0] > co[0][0] and co[1][1]> co[0][1] and co[1][1] - co[0][1] > 65:
+            print("Turn left.")
+            keyinput.release_key('s')
+            keyinput.release_key('d')
+            keyinput.press_key('a')
+            cv2.putText(image, "Turn left", (50, 50), font, 0.8, (0, 255, 0), 2, cv2.LINE_AA)
+            cv2.line(image, (int(xbp), int(ybp)), (int(xm), int(ym)), (195, 255, 62), 20)
+
+
+        elif co[0][0] > co[1][0] and co[1][1]> co[0][1] and co[1][1] - co[0][1] > 65:
+            print("Turn right.")
+            keyinput.release_key('s')
+            keyinput.release_key('a')
+            keyinput.press_key('d')
+            cv2.putText(image, "Turn right", (50, 50), font, 0.8, (0, 255, 0), 2, cv2.LINE_AA)
+            cv2.line(image, (int(xap), int(yap)), (int(xm), int(ym)), (195, 255, 62), 20)
+
+        elif co[1][0] > co[0][0] and co[0][1]> co[1][1] and co[0][1] - co[1][1] > 65:
+            print("Turn right.")
+            keyinput.release_key('s')
+            keyinput.release_key('a')
+            keyinput.press_key('d')
+            cv2.putText(image, "Turn right", (50, 50), font, 0.8, (0, 255, 0), 2, cv2.LINE_AA)
+            cv2.line(image, (int(xap), int(yap)), (int(xm), int(ym)), (195, 255, 62), 20)
+        
         else:
             print("keeping straight")
             keyinput.release_key('s')
@@ -126,4 +142,3 @@ with mp_hands.Hands(
     if cv2.waitKey(5) & 0xFF == ord('q'):
       break
 cap.release()
-
